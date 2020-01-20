@@ -5,6 +5,7 @@ const Intern = require("./lib/Intern")
 const fs = require("fs")
 const util = require("util")
 const writeFileAsync = util.promisify(fs.writeFile);
+const appendFileAsync = util.promisify(fs.appendFile);
 const inquirer = require("inquirer")
 const path = require("path")
 const templatesDir = path.resolve(__dirname, "./test.html");
@@ -66,30 +67,124 @@ const collectInputs = async (inputs = []) => {
 };
 
 const main = async () => {
-    const wholeTeam = await collectInputs();
-    console.log(wholeTeam);
+    const team = await collectInputs();
+    console.log(team);
+
+
+    for (let i = 0; i < team.length; i++) {
+        const teamMember = await team[i]
+
+        console.log("=====================");
+        console.log(teamMember);
+
+        if (teamMember.role === "Manager") {
+            const html = `
+        
+            <div class="card">
+                <div class="card-header">
+                    ${teamMember.name}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${teamMember.role}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${teamMember.id}</li>
+                        <li class="list-group-item">Email: ${teamMember.email}</li>
+                        <li class="list-group-item">Office number: ${teamMember.office}</li>
+                    </ul>
+                </div>
+            </div>
+        
+`
+            appendFileAsync("index.html", html)
+        }
+        else if (teamMember.role === "Engineer") {
+            const html = `
+                    <div class="card">
+                <div class="card-header">
+                    ${teamMember.name}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${teamMember.role}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${teamMember.id}</li>
+                        <li class="list-group-item">Email: ${teamMember.email}</li>
+                        <li class="list-group-item">GitHub: ${teamMember.github}</li>
+                    </ul>
+                </div>
+            </div>
+        
+`
+            appendFileAsync("index.html", html)
+        }
+        else if (teamMember.role === "Intern") {
+            const html = `
+            <div class="card">
+                <div class="card-header">
+                    ${teamMember.name}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${teamMember.role}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${teamMember.id}</li>
+                        <li class="list-group-item">Email: ${teamMember.email}</li>
+                        <li class="list-group-item">School: ${teamMember.school}</li>
+                    </ul>
+                </div>
+            </div>
+      
+`
+            appendFileAsync("index.html", html)
+        }
+        else {
+            const html = `</body> </html>`
+            appendFileAsync("index.html", html)
+
+        }
+
+    }
 };
 
 main();
 
 
-const renderEngineer = team => {
 
-    var templateEngineer = fs.readFileSync(path.resolve(templatesDir), "utf8")
-    console.log(templateEngineer);
-    data(templateEngineer, "name", team[0].name)
-    const outputPath = path.resolve(__dirname, "test.html");
-    fs.writeFileSync(outputPath, templateEngineer, "utf8")
-    // writeFileAsync("test.html", JSON.stringify(team))
 
-}
 
-const data = (file, placeHolder, answer) => {
-    console.log(placeHolder, answer);
 
-    const pattern = new RegExp("{{ " + placeHolder + " }}", "gm");
-    // console.log(pattern);
-    var test = file.replace(pattern, answer)
-    console.log(test);
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const renderTeam = team => {
+
+//     var templateEngineer = fs.readFileSync(path.resolve(templatesDir), "utf8")
+//     console.log(templateEngineer);
+//     data(templateEngineer, "name", team[0].name)
+//     const outputPath = path.resolve(__dirname, "test.html");
+//     fs.writeFileSync(outputPath, templateEngineer, "utf8")
+//     // writeFileAsync("test.html", JSON.stringify(team))
+
+// }
+
+// const data = (file, placeHolder, answer) => {
+//     console.log(placeHolder, answer);
+
+//     const pattern = new RegExp("{{ " + placeHolder + " }}", "gm");
+//     // console.log(pattern);
+//     var test = file.replace(pattern, answer)
+//     console.log(test);
+
+// }
+
+// module.exports(team)
