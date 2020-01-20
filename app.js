@@ -11,113 +11,66 @@ const templatesDir = path.resolve(__dirname, "./test.html");
 
 
 console.log(templatesDir);
-
 const collectInputs = async (inputs = []) => {
-    const managerPrompts = [
-        {
-            type: "input",
-            message: "What is the manager's name?",
-            name: "managerName"
-        },
-        {
-            type: "input",
-            message: "What is the manager's ID?",
-            name: "managerID"
-        },
-        {
-            type: "input",
-            message: "What is the manager's email?",
-            name: "managerEmail"
-        },
-        {
-            type: "input",
-            message: "What is the manager's office number?",
-            name: "managerOffice"
-        },
+    const prompts = [
         {
             type: "list",
-            message: "Create new Employee",
-            choices: ["Engineer", "Intern", "No more employees"],
-            name: "newEmployee"
-        }
-    ]
-    const { ...answers } = await inquirer.prompt(managerPrompts);
-
-}
-
-// function next() {
-//     inquirer
-//         .prompt(
-//             {
-//                 type: "list",
-//                 message: "Create new Employee",
-//                 choices: ["Engineer", "Intern", "No more employees"],
-//                 name: "newEmployee"
-//             })
-//         .then(){
-//                 if (newEmployee == "Intern"){
-
-//                 }
-//             }
-// }
-
-
-inquirer
-    .prompt([
-        {
-            type: "input",
-            message: "What is the manager's name?",
-            name: "managerName"
+            message: "What is the employee's role?",
+            name: "role",
+            choices: ["Manager", "Engineer", "Intern"]
         },
         {
             type: "input",
-            message: "What is the manager's ID?",
-            name: "managerID"
+            message: "What is the employee's name?",
+            name: "name"
         },
         {
             type: "input",
-            message: "What is the manager's email?",
-            name: "managerEmail"
+            message: "What is the employee's ID?",
+            name: "id"
         },
         {
             type: "input",
-            message: "What is the manager's office number?",
-            name: "managerOffice"
+            message: "What is the employee's email?",
+            name: "email"
         },
         {
-            type: "list",
-            message: "Create new Employee",
-            choices: ["Engineer", "Intern", "No more employees"],
-            name: "newEmployee"
+            type: "input",
+            message: "What is the employee's office number?",
+            name: "office",
+            when: (answers) => answers.role === 'Manager'
+        },
+        {
+            type: "input",
+            message: "What is the employee's school?",
+            name: "school",
+            when: (answers) => answers.role === 'Intern'
+        },
+        {
+            type: "input",
+            message: "What is the employee's github?",
+            name: "github",
+            when: (answers) => answers.role === 'Engineer'
+        },
+        {
+            type: 'confirm',
+            name: 'again',
+            message: 'Enter another employee?',
+            default: true
         }
-    ])
-    .then(function ({ managerName, managerID, managerEmail, managerOffice, newEmployee }) {
+    ];
 
-        var team = {
-            role: "Manager",
-            name: managerName,
-            id: managerID,
-            email: managerEmail,
-            office: managerOffice
-        }
-        wholeTeam.push(team)
+    const { again, ...answers } = await inquirer.prompt(prompts);
+    const newInputs = [...inputs, answers];
+    return again ? collectInputs(newInputs) : newInputs;
+};
 
-        console.log(wholeTeam);
+const main = async () => {
+    const wholeTeam = await collectInputs();
+    console.log(wholeTeam);
+};
 
-        if (newEmployee == "Engineer") {
-
-            // renderEngineer()
-
-        }
-        // const newHTML = generateHTML(team)
-        // writeFileAsync("index.html", newHTML)
-
-    });
-
-// module.exports(team)
-
-
-
+main();
 
 
 const renderEngineer = team => {
