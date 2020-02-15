@@ -68,7 +68,6 @@ function generateHTML(team) {
             </div>
         </div>
     </body>
-    
     </html>`;
 }
 
