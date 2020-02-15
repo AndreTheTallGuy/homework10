@@ -68,7 +68,6 @@ const collectInputs = async (inputs = []) => {
 const main = async () => {
   const team = await collectInputs();
   console.log(team);
-
   for (let i = 0; i < team.length; i++) {
     const teamMember = await team[i];
 
