@@ -135,26 +135,3 @@ const main = async () => {
 };
 
 main();
-
-// const renderTeam = team => {
-
-//     var templateEngineer = fs.readFileSync(path.resolve(templatesDir), "utf8")
-//     console.log(templateEngineer);
-//     data(templateEngineer, "name", team[0].name)
-//     const outputPath = path.resolve(__dirname, "test.html");
-//     fs.writeFileSync(outputPath, templateEngineer, "utf8")
-//     // writeFileAsync("test.html", JSON.stringify(team))
-
-// }
-
-// const data = (file, placeHolder, answer) => {
-//     console.log(placeHolder, answer);
-
-//     const pattern = new RegExp("{{ " + placeHolder + " }}", "gm");
-//     // console.log(pattern);
-//     var test = file.replace(pattern, answer)
-//     console.log(test);
-
-// }
-
-// module.exports(team)
