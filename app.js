@@ -107,9 +107,8 @@ const main = async () => {
                         <li class="list-group-item">GitHub: ${teamMember.github}</li>
                     </ul>
                 </div>
-            </div>
-        
-`;
+            </div>`;
+
       appendFileAsync("index.html", html);
     } else if (teamMember.role === "Intern") {
       const html = `
