@@ -124,9 +124,8 @@ const main = async () => {
                         <li class="list-group-item">School: ${teamMember.school}</li>
                     </ul>
                 </div>
-            </div>
-      
-`;
+            </div>`;
+
       appendFileAsync("index.html", html);
     } else {
       const html = `</body> </html>`;
