@@ -90,9 +90,8 @@ const main = async () => {
                         <li class="list-group-item">Office number: ${teamMember.office}</li>
                     </ul>
                 </div>
-            </div>
-        
-`;
+            </div>`;
+
       appendFileAsync("index.html", html);
     } else if (teamMember.role === "Engineer") {
       const html = `
