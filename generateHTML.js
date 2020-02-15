@@ -1,10 +1,8 @@
-const app = require("./app.js")
+const app = require("./app.js");
 
 function generateHTML(team) {
-
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
     <html lang="en">
-    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,13 +30,10 @@ function generateHTML(team) {
                 margin: 0;
                 padding-top: 35px;
                 box-shadow: 0 0 7px black;
-    
             }
-    
             .flex {
                 display: flex;
                 justify-content: center;
-    
             }
     
             .card {
@@ -80,7 +75,7 @@ function generateHTML(team) {
     
     </body>
     
-    </html>`
+    </html>`;
 }
 
-module.exports = generateHTML()
+module.exports = generateHTML();
