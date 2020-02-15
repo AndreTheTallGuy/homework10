@@ -35,26 +35,21 @@ function generateHTML(team) {
                 display: flex;
                 justify-content: center;
             }
-    
             .card {
-    
                 flex-wrap: wrap;
                 width: 250px;
                 height: 300px;
                 margin: 20px;
                 box-shadow: 0 0 7px black;
             }
-    
             .card-header {
                 background: #06d3d3;
             }
-    
             .list-group-item {
                 padding-left: 0px;
             }
         </style>
     </head>
-    
     <body>
         <div class="jumbotron">Employee Data</div>
         <div class="flex">
