@@ -70,5 +70,4 @@ function generateHTML(team) {
     </body>
     </html>`;
 }
-
 module.exports = generateHTML();
